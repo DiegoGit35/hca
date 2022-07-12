@@ -1,0 +1,118 @@
+package com.andinos.hca.model.entity;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name="usuario")
+public class Usuario implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotEmpty
+    private String username;
+
+    @NotEmpty
+    @Email
+    private String email;
+
+    @NotEmpty
+    private String password;
+
+    @NotEmpty
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Column(name = "create_time")
+    private Date createTime;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Venta> ventas;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Carrito> carritos;
+    private String foto;
+
+    private static final long serialVersionUID = 1L;
+
+    public Usuario() {
+        this.ventas = new ArrayList<Venta>();
+    }
+
+//    public Usuario(Long id, String username, String email, String password, Date createTime, String foto) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//        this.createTime = createTime;
+//        this.foto = foto;
+//    }
+
+    @PrePersist
+    public void prePersist() {
+        createTime = new Date();
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCreate_time(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Date getCreate_time() {
+        return createTime;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public void addVenta(Venta venta){
+        ventas.add(venta);
+    }
+    public void addCarrito(Carrito carrito){
+        carritos.add(carrito);
+    }
+}
