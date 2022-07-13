@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="producto")
@@ -28,6 +29,10 @@ public class Producto implements Serializable {
     private int stock;
     @NotEmpty
     private String imagen;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private List<Categoria> categoria;
 
     @NotEmpty
     @Temporal(TemporalType.DATE)
