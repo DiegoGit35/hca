@@ -58,6 +58,9 @@ public class Usuario implements Serializable {
     public void prePersist() {
         createTime = new Date();
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Carrito carrito;
     public void setId(Long id) {
         this.id = id;
     }
