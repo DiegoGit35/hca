@@ -16,7 +16,7 @@ public class Carrito implements Serializable {
     private Long id;
 
     @OneToMany(mappedBy = "carrito", fetch = FetchType.LAZY)
-    private Set<ItemProducto> itemProductos;
+    private Set<ItemProducto> misItemProductos;
 
     @ManyToOne
     @JoinColumn(name="idusuario", nullable=false)
@@ -31,11 +31,11 @@ public class Carrito implements Serializable {
     }
 
     public Set<ItemProducto> getItemProductos() {
-        return itemProductos;
+        return misItemProductos;
     }
 
-    public void setItemProductos(Set<ItemProducto> itemProductos) {
-        this.itemProductos = itemProductos;
+    public void setItemProductos(Set<ItemProducto> misItemProductos) {
+        this.misItemProductos = misItemProductos;
     }
 
     public Usuario getUsuario() {
