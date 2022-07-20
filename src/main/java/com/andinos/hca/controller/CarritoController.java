@@ -16,8 +16,8 @@ public class CarritoController {
     private CarritoService carritoService;
 
     @GetMapping("/carrito")
-    public Set<ItemProducto> getItems(){
-        return carritoService.
+    public Set<ItemProducto> getItems(Long id){
+        return carritoService.findOne(id).getItemProductos();
     }
 
 }
