@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductoServiceImpl implements IProductoService{
@@ -37,5 +39,16 @@ public class ProductoServiceImpl implements IProductoService{
     @Transactional
     public void delete(Long id) {
         productoDao.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Set<Producto> buscarPorNombre(String parteNombre){
+        return (Set<Producto>) productoDao.buscarPorNombre(parteNombre);
+    }
+
+    @Override
+    public Set<Producto> filtrarPorCategoria(Categoria categoria) {
+        return (Set<Producto>) productoDao.filtrarPorCategoria(categoria);
     }
 }

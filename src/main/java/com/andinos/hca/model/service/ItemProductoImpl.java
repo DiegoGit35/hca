@@ -30,8 +30,8 @@ public class ItemProductoImpl implements IItemProductoService {
 
     @Override
     @Transactional
-    public ItemProducto save(ItemProducto ItemProducto) {
-        return IItemProductoDAO.save(ItemProducto);
+    public void save(ItemProducto ItemProducto) {
+        IItemProductoDAO.save(ItemProducto);
     }
 
 

@@ -13,7 +13,7 @@ public interface IItemProductoService {
 
     public Page<ItemProducto> findAll(Pageable pageable);
 
-    public ItemProducto save(ItemProducto ItemProducto);
+    public void save(ItemProducto ItemProducto);
 
 
 }

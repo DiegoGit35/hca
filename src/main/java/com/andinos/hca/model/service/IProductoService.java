@@ -14,4 +14,9 @@ public interface IProductoService {
     public Producto findOne(Long id);
 
     public void delete(Long id);
+
+    public Set<Producto> buscarPorNombre(String parteNombre);
+
+    public Set<Producto> filtrarPorCategoria(Categoria categoria);
+
 }
