@@ -1,8 +1,10 @@
 package com.andinos.hca.model.service;
 
+import com.andinos.hca.model.entity.Categoria;
 import com.andinos.hca.model.entity.Producto;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IProductoService {
     public List<Producto> findAll();

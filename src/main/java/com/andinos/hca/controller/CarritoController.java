@@ -15,9 +15,9 @@ public class CarritoController {
     @Autowired
     private CarritoService carritoService;
 
-    @GetMapping("/carrito")
-    public Set<ItemProducto> getItems(Long id){
-        return carritoService.findOne(id).getItemProductos();
+    @GetMapping("ver")
+    public  ResponseEntity<?> getItems(Long id){
+        return new ResponseEntity<>(carritoService.findOne(id).getItemProductos(), HttpStatus.FOUND);
     }
 
 }

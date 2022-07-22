@@ -1,6 +1,7 @@
 package com.andinos.hca.model.service;
 
 import com.andinos.hca.model.dao.IProductoDAO;
+import com.andinos.hca.model.entity.Categoria;
 import com.andinos.hca.model.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

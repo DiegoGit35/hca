@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ItemProductoImpl implements IItemProductoService{
+public class ItemProductoImpl implements IItemProductoService {
     @Autowired
     private com.andinos.hca.model.dao.IItemProductoDAO IItemProductoDAO;
 
@@ -28,11 +28,6 @@ public class ItemProductoImpl implements IItemProductoService{
     }
 
 
-    @Transactional(readOnly = true)
-    public Optional<ItemProducto> findById(Long id) {
-        return IItemProductoDAO.findById(id);
-    }
-
     @Override
     @Transactional
     public ItemProducto save(ItemProducto ItemProducto) {
@@ -40,8 +35,4 @@ public class ItemProductoImpl implements IItemProductoService{
     }
 
 
-    @Transactional
-    public void deleteById(Long id) {
-        IItemProductoDAO.deleteById(id);
-    }
 }
