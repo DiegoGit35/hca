@@ -28,7 +28,7 @@ public class UsuarioController {
 
     @GetMapping(name = "usua/")
     public ResponseEntity<?> getProductos(){
-        return new ResponseEntity<> (productoService.findAll(),
+        return new ResponseEntity<> (usuarioService.findAll(),
                 HttpStatus.ACCEPTED);
     }
 }

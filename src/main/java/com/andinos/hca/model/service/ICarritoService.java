@@ -7,9 +7,11 @@ import java.util.List;
 public interface ICarritoService {
     public List<Carrito> findAll();
 
-    public void save(Carrito carrito);
+    public boolean save(Carrito carrito);
 
     public Carrito findOne(Long id);
 
     public void delete(Long id);
+
+//    public void update(Carrito carrito);
 }

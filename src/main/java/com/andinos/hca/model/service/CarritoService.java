@@ -20,8 +20,9 @@ public class CarritoService implements ICarritoService{
     }
 
     @Override
-    public void save(Carrito carrito) {
+    public boolean save(Carrito carrito) {
         carritoDao.save(carrito);
+        return true;
     }
 
     @Override

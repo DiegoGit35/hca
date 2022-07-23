@@ -2,6 +2,7 @@ package com.andinos.hca.model.service;
 
 import com.andinos.hca.model.entity.Categoria;
 import com.andinos.hca.model.entity.Producto;
+import com.andinos.hca.model.exceptions.ProductoNotFoundException;
 
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,7 @@ public interface IProductoService {
 
     public void save(Producto producto);
 
-    public Producto findOne(Long id);
+    public Producto findById(Long id) throws ProductoNotFoundException;
 
     public void delete(Long id);
 
@@ -19,4 +20,5 @@ public interface IProductoService {
 
     public Set<Producto> filtrarPorCategoria(Categoria categoria);
 
+    public boolean aniadirProducto(Long idProducto, Long idUsuario);
 }

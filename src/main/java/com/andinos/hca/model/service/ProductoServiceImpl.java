@@ -3,6 +3,7 @@ package com.andinos.hca.model.service;
 import com.andinos.hca.model.dao.IProductoDAO;
 import com.andinos.hca.model.entity.Categoria;
 import com.andinos.hca.model.entity.Producto;
+import com.andinos.hca.model.exceptions.ProductoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +32,8 @@ public class ProductoServiceImpl implements IProductoService{
 
     @Override
     @Transactional
-    public Producto findOne(Long id) {
-        return productoDao.findById(id).orElse(null);
+    public Producto findById(Long id) throws ProductoNotFoundException {
+        return productoDao.findById(id).orElseThrow(() -> new ProductoNotFoundException(id));
     }
 
     @Override
@@ -50,5 +51,11 @@ public class ProductoServiceImpl implements IProductoService{
     @Override
     public Set<Producto> filtrarPorCategoria(Categoria categoria) {
         return (Set<Producto>) productoDao.filtrarPorCategoria(categoria);
+    }
+
+    @Override
+    public boolean aniadirProducto(Long idProducto, Long idUsuario) {
+        productoDao.aniadirItem(idProducto,idUsuario);
+        return true;
     }
 }

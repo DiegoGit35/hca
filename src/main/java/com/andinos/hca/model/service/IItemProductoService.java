@@ -9,11 +9,10 @@ import java.util.Optional;
 
 public interface IItemProductoService {
 
-    public Iterable<ItemProducto> findAll();
-
     public Page<ItemProducto> findAll(Pageable pageable);
 
     public void save(ItemProducto ItemProducto);
 
 
+    void sumarCantidad(ItemProducto itemProducto);
 }

@@ -12,4 +12,6 @@ public interface IProductoDAO extends JpaRepository<Producto, Long> {
     Set<Producto> buscarPorNombre(String parteNombre);
 
     Set<Producto> filtrarPorCategoria(Categoria categoria);
+
+    void aniadirItem(Long idProducto, Long idUsuario);
 }

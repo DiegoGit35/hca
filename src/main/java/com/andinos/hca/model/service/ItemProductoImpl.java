@@ -13,13 +13,8 @@ import java.util.Optional;
 @Service
 public class ItemProductoImpl implements IItemProductoService {
     @Autowired
-    private com.andinos.hca.model.dao.IItemProductoDAO IItemProductoDAO;
+    private IItemProductoDAO IItemProductoDAO;
 
-    @Override
-    @Transactional(readOnly = true)
-    public Iterable<ItemProducto> findAll() {
-        return IItemProductoDAO.findAll();
-    }
 
     @Override
     @Transactional(readOnly = true)
@@ -35,4 +30,8 @@ public class ItemProductoImpl implements IItemProductoService {
     }
 
 
+    public void sumarCantidad(ItemProducto itemProducto){
+//        implementar logica para sumar cantidades de productos iguales en el carrito
+//        buena suerte!!
+    }
 }

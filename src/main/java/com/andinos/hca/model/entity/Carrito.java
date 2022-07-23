@@ -38,6 +38,11 @@ public class Carrito implements Serializable {
         this.misItemProductos = misItemProductos;
     }
 
+    public void aniadirItemProducto(ItemProducto itemProducto){
+        misItemProductos.add(itemProducto);
+    }
+
+
     public Usuario getUsuario() {
         return usuario;
     }
