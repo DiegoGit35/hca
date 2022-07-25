@@ -1,9 +1,9 @@
 package com.andinos.hca.controller;
 
 
-import com.andinos.hca.model.dao.IProductoDAO;
 import com.andinos.hca.model.entity.Categoria;
 import com.andinos.hca.model.entity.Producto;
+import com.andinos.hca.model.service.IGeneralService;
 import com.andinos.hca.model.service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +16,9 @@ public class ProductoController {
 
     @Autowired
     private IProductoService productoService;
+
+    @Autowired
+    private IGeneralService generalService;
 
     @GetMapping
     public ResponseEntity<?> getProductos() {
@@ -57,6 +60,6 @@ public class ProductoController {
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable Long idProducto, @RequestBody Long idUsuario){
-        return new ResponseEntity<>(productoService.aniadirProducto(idProducto, idUsuario), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(generalService.aniadirProducto(idProducto, idUsuario), HttpStatus.ACCEPTED);
     }
 }
