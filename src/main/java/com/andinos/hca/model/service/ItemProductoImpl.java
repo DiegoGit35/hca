@@ -25,13 +25,20 @@ public class ItemProductoImpl implements IItemProductoService {
 
     @Override
     @Transactional
-    public void save(ItemProducto ItemProducto) {
+    public boolean save(ItemProducto ItemProducto) {
         IItemProductoDAO.save(ItemProducto);
+        return true;
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        IItemProductoDAO.deleteById(id);
+        return true;
     }
 
 
-    public void sumarCantidad(ItemProducto itemProducto){
-//        implementar logica para sumar cantidades de productos iguales en el carrito
-//        buena suerte!!
-    }
+//    public void sumarMismoItem(ItemProducto itemProducto){
+////        implementar logica para sumar cantidades de productos iguales en el carrito
+////        buena suerte!!
+//    }
 }

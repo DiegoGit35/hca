@@ -30,10 +30,10 @@ public class ItemProductoController {
         return new ResponseEntity<>(itemProductoService.findAll(page),
                 HttpStatus.FOUND);
     }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.FOUND)
-    public void sumarCantidad(@RequestBody ItemProducto itemProducto){
-        itemProductoService.sumarCantidad(itemProducto);
-    }
+//
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.FOUND)
+//    public void sumarCantidad(@RequestBody ItemProducto itemProducto){
+//        itemProductoService.sumarMismoItem(itemProducto);
+//    }
 }

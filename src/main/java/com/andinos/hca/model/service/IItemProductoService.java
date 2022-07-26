@@ -11,8 +11,10 @@ public interface IItemProductoService {
 
     public Page<ItemProducto> findAll(Pageable pageable);
 
-    public void save(ItemProducto ItemProducto);
+    public boolean save(ItemProducto ItemProducto);
+
+    public boolean delete(Long id);
 
 
-    void sumarCantidad(ItemProducto itemProducto);
+//    void sumarMismoItem(ItemProducto itemProducto);
 }

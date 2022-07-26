@@ -1,5 +1,6 @@
 package com.andinos.hca.model.entity;
 
+import com.andinos.hca.model.enums.Estado;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Producto implements Serializable {
     private float precio;
 
     @NotEmpty
-    private Enum estado;
+    private Estado estado;
     @NotEmpty
     private int category_id;
     @NotEmpty
@@ -42,7 +43,7 @@ public class Producto implements Serializable {
     @NotEmpty
     private String descripcion;
 
-    public Producto(int idproducto, String nombre, float precio, Enum estado, int category_id, int stock, String imagen, Date fechaYhora, String descripcion) {
+    public Producto(int idproducto, String nombre, float precio, Estado estado, int category_id, int stock, String imagen, Date fechaYhora, String descripcion) {
         this.idproducto = idproducto;
         this.nombre = nombre;
         this.precio = precio;
@@ -82,11 +83,11 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
-    public Enum getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Enum estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 

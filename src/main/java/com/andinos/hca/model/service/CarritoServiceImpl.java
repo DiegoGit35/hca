@@ -3,6 +3,7 @@ package com.andinos.hca.model.service;
 
 import com.andinos.hca.model.dao.ICarritoDAO;
 import com.andinos.hca.model.entity.Carrito;
+import com.andinos.hca.model.entity.ItemProducto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,16 @@ public class CarritoServiceImpl implements ICarritoService{
     }
 
     @Override
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         carritoDao.deleteById(id);
+        return true;
+    }
+
+    @Override
+    public boolean aniadirItemProducto(ItemProducto itemProducto) {
+        Carrito carrito = new Carrito();
+        carrito.addItemProducto(itemProducto);
+        carritoDao.save(carrito);
+        return true;
     }
 }

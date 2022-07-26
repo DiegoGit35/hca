@@ -20,14 +20,13 @@ public class ItemProducto implements Serializable {
     @JoinColumn(name="idcarrito", nullable=false)
     private Carrito carrito;
 
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idproducto")
     private Producto producto;
 
+    public Integer getCantidad() {
+        return cantidad;
+    }
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }

@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Set;
 
 public interface IProductoDAO extends JpaRepository<Producto, Long> {
-    Set<Producto> buscarPorNombre(String parteNombre);
+    Set<Producto> findByNombre(String parteNombre);
 
-    Set<Producto> filtrarPorCategoria(Categoria categoria);
+    Set<Producto> findByCategoria(Categoria categoria);
 
-    void aniadirItem(Long idProducto, Usuario Usuario);
+//    void addItem(Long idProducto, Usuario Usuario);
 }

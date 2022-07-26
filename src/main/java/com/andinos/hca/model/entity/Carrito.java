@@ -68,4 +68,8 @@ public class Carrito implements Serializable {
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
+
+    public void addItemProducto(ItemProducto itemProducto) {
+        misItemProductos.add(itemProducto);
+    }
 }
