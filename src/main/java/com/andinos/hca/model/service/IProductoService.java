@@ -11,7 +11,7 @@ import java.util.Set;
 public interface IProductoService {
     public List<Producto> findAll();
 
-    public void save(Producto producto);
+    public Producto save(Producto producto);
 
     public Producto findById(Long id) throws ProductoNotFoundException;
 

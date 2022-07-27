@@ -1,6 +1,7 @@
 package com.andinos.hca.model.entity;
 
 import com.andinos.hca.model.enums.Estado;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,46 +10,48 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name="producto")
-public class Producto implements Serializable {
+public class Producto{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idproducto;
 
-    @NotEmpty
+
     private String nombre;
-    @NotEmpty
+
     private float precio;
 
-    @NotEmpty
+
     private Estado estado;
-    @NotEmpty
+
     private int category_id;
-    @NotEmpty
+
     private int stock;
-    @NotEmpty
+
     private String imagen;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private List<Categoria> categoria;
 
-    @NotEmpty
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "create_time")
     private Date fechaYhora;
-    @NotEmpty
+
     private String descripcion;
 
-    public Producto(int idproducto, String nombre, float precio, Estado estado, int category_id, int stock, String imagen, Date fechaYhora, String descripcion) {
+    public Producto(int idproducto, String nombre, float precio, Estado estado, int stock, List<Categoria> categoria, String imagen, Date fechaYhora, String descripcion) {
         this.idproducto = idproducto;
         this.nombre = nombre;
         this.precio = precio;
         this.estado = estado;
-        this.category_id = category_id;
         this.stock = stock;
         this.imagen = imagen;
         this.fechaYhora = fechaYhora;

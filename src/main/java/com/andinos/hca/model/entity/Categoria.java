@@ -1,10 +1,13 @@
 package com.andinos.hca.model.entity;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categoria")
+@Data
+@Table(name = "/categoria")
 public class Categoria {
 
     @Id

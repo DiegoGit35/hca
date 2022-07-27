@@ -1,5 +1,6 @@
 package com.andinos.hca.model.entity;
 
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name="usuario")
 public class Usuario implements Serializable {
     @Id

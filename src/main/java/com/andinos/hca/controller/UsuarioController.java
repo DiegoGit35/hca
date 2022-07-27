@@ -26,7 +26,7 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
 
-    @GetMapping(name = "usua/")
+    @GetMapping(value = "user")
     public ResponseEntity<?> getProductos(){
         return new ResponseEntity<> (usuarioService.findAll(),
                 HttpStatus.ACCEPTED);

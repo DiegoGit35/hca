@@ -1,12 +1,15 @@
 package com.andinos.hca.model.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "carrito")
+@Data
+@Table(name = "/carrito")
 public class Carrito implements Serializable {
 
     private static final long serialVersionUID = 1L;
