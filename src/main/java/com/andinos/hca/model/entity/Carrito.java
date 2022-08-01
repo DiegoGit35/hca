@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "/carrito")
+@Table(name = "carrito")
 public class Carrito implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,8 +22,12 @@ public class Carrito implements Serializable {
     private Set<ItemProducto> misItemProductos;
 
     @ManyToOne
-    @JoinColumn(name="idusuario", nullable=false)
+    @JoinColumn(name = "idCarrito", insertable = false, updatable = false)
     private Usuario usuario;
+
+    public Carrito() {
+    }
+
 
     public Long getId() {
         return id;

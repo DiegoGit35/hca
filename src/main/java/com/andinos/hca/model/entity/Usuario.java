@@ -19,17 +19,19 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    public Usuario(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     private String username;
 
-    @NotEmpty
     @Email
     private String email;
 
-    @NotEmpty
     private String password;
 
-    @NotEmpty
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "create_time")
@@ -37,8 +39,8 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Venta> ventas;
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Carrito> carritos;
+//    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Carrito> carritos;
     private String foto;
 
     private static final long serialVersionUID = 1L;
@@ -47,21 +49,22 @@ public class Usuario implements Serializable {
         this.ventas = new ArrayList<Venta>();
     }
 
-//    public Usuario(Long id, String username, String email, String password, Date createTime, String foto) {
-//        this.id = id;
-//        this.username = username;
-//        this.email = email;
-//        this.password = password;
-//        this.createTime = createTime;
-//        this.foto = foto;
-//    }
+    public Usuario(Long id, String username, String email, String password, Date createTime, String foto) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.createTime = createTime;
+        this.foto = foto;
+    }
 
     @PrePersist
     public void prePersist() {
         createTime = new Date();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany
+    @JoinColumn(name = "idCarrito", referencedColumnName = "id")
     private Carrito carrito;
     public void setId(Long id) {
         this.id = id;
@@ -117,7 +120,7 @@ public class Usuario implements Serializable {
     public void addVenta(Venta venta){
         ventas.add(venta);
     }
-    public void addCarrito(Carrito carrito){
-        carritos.add(carrito);
-    }
+//    public void addCarrito(Carrito carrito){
+//        carrito.add(carrito);
+//    }
 }

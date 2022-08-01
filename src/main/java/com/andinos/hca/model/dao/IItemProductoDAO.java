@@ -1,9 +1,13 @@
 package com.andinos.hca.model.dao;
 
+import com.andinos.hca.model.entity.Carrito;
 import com.andinos.hca.model.entity.ItemProducto;
+import com.andinos.hca.model.entity.Producto;
+import com.andinos.hca.model.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IItemProductoDAO extends JpaRepository<ItemProducto, Long> {
+import java.util.List;
 
-//    void sumarMismoItem(ItemProducto itemProducto);
+public interface IItemProductoDAO extends JpaRepository<ItemProducto, Long> {
+    ItemProducto findByCarritoAndProducto(Carrito carrito, Producto producto);
 }

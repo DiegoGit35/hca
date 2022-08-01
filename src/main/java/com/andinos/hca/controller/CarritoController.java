@@ -1,33 +1,42 @@
 package com.andinos.hca.controller;
 
 import com.andinos.hca.model.entity.Carrito;
+import com.andinos.hca.model.entity.ItemProducto;
+import com.andinos.hca.model.entity.Usuario;
 import com.andinos.hca.model.service.CarritoServiceImpl;
 import com.andinos.hca.model.service.IItemProductoService;
+import com.andinos.hca.model.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
-@RequestMapping("/{idUsuario}/carrito")
+@RequestMapping("/carrito")
 public class CarritoController {
 
     @Autowired
     private IItemProductoService itemProductoService;
 
     @Autowired
-    private CarritoServiceImpl carritoServiceImpl;
+    private CarritoServiceImpl carritoService;
+
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping
-    public  ResponseEntity<?> getItems(Long id){
-        return new ResponseEntity<>(carritoServiceImpl.findOne(id).getItemProductos(), HttpStatus.FOUND);
+    public  ResponseEntity<?> getItems(@RequestParam Long idUsuario){
+        Carrito carrito = carritoService.findOne(idUsuario);
+        return new ResponseEntity<>(carrito, HttpStatus.FOUND);
     }
 
-    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> crear(@RequestBody Carrito carrito){
-        return new ResponseEntity<>(carritoServiceImpl.save(carrito), HttpStatus.CREATED);
-    }
+//    @PostMapping
+////    @ResponseStatus(HttpStatus.CREATED)
+//    public ResponseEntity<Carrito> save(@RequestBody Carrito carrito){
+//        return new ResponseEntity<>(carritoService.save(carrito), HttpStatus.CREATED);
+//    }
 
 
     @DeleteMapping(value = "/{idItem}")

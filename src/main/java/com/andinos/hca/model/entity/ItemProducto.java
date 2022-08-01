@@ -10,6 +10,9 @@ import java.io.Serializable;
 @Data
 @Table(name = "item_producto")
 public class ItemProducto implements Serializable {
+    public ItemProducto() {
+    }
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -26,6 +29,13 @@ public class ItemProducto implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idproducto")
     private Producto producto;
+
+    public ItemProducto(Long id, Integer cantidad, Carrito carrito, Producto producto) {
+        this.id = id;
+        this.cantidad = cantidad;
+        this.carrito = carrito;
+        this.producto = producto;
+    }
 
     public Integer getCantidad() {
         return cantidad;
@@ -62,4 +72,5 @@ public class ItemProducto implements Serializable {
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
+
 }

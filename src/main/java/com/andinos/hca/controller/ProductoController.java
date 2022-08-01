@@ -1,13 +1,12 @@
 package com.andinos.hca.controller;
 
 
+import com.andinos.hca.model.dao.ICarritoDAO;
+import com.andinos.hca.model.dao.IUsuarioDAO;
 import com.andinos.hca.model.entity.*;
 import com.andinos.hca.model.enums.Estado;
 import com.andinos.hca.model.exceptions.ProductoNotFoundException;
-import com.andinos.hca.model.service.IGeneralService;
-import com.andinos.hca.model.service.IItemProductoService;
-import com.andinos.hca.model.service.IProductoService;
-import com.andinos.hca.model.service.ICarritoService;
+import com.andinos.hca.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,8 +25,10 @@ public class ProductoController {
     private IProductoService productoService;
 
     @Autowired
-    private ICarritoService carritoService;
+    private ICarritoDAO carritoDAO;
 
+    @Autowired
+    private IUsuarioDAO usuarioDAO;
     @Autowired
     private IItemProductoService itemProductoService;
 
@@ -72,43 +73,32 @@ public class ProductoController {
     }
 
     @PostMapping(value = "/{id}")
-    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable Long idProducto, @RequestBody Long idCarrito, @RequestBody Integer cantidad) {
+    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable("id") Long idProducto, @RequestBody Integer cantidad, @RequestBody Carrito carrito) {
+//        Usuario usuario = usuarioDAO.findById(idUsuario);
+//        Carrito carrito = carritoDao.findCarritoByUsuario;
 
-        Producto producto;
-        try {
-            producto = productoService.findById(idProducto);
-        } catch (ProductoNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        Carrito carrito = carritoService.findOne(idCarrito);
-
-        ItemProducto itemProducto = new ItemProducto();
-        itemProducto.setProducto(producto);
-        itemProducto.setCarrito(carrito);
-        itemProducto.setCantidad(cantidad);
-        itemProductoService.save(itemProducto);
-
-        return new ResponseEntity<>(carritoService.aniadirItemProducto(itemProducto), HttpStatus.ACCEPTED);
+        Integer aniadirCantidad = itemProductoService.aniadirItemProducto(idProducto, cantidad, carrito);
+        String mensaje = "se añadieron: " + aniadirCantidad + " items a tu carrito";
+        return new ResponseEntity<>(mensaje, HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> quitarProductoAlCarrito(@PathVariable Long idProducto, @RequestBody Long idCarrito, @RequestBody Integer cantidad) {
-
-        Producto producto;
-        try {
-            producto = productoService.findById(idProducto);
-        } catch (ProductoNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        Carrito carrito = carritoService.findOne(idCarrito);
-
-        ItemProducto itemProducto = new ItemProducto();
-        itemProducto.setProducto(producto);
-        itemProducto.setCarrito(carrito);
-        itemProducto.setCantidad(cantidad);
-
-        return new ResponseEntity<>(carritoService.aniadirItemProducto(itemProducto), HttpStatus.ACCEPTED);
-    }
+//    @DeleteMapping(value = "/{id}")
+//    public ResponseEntity<?> quitarProductoAlCarrito(@PathVariable Long idProducto, @RequestBody Long idCarrito, @RequestBody Integer cantidad) {
+//
+//        Producto producto;
+//        try {
+//            producto = productoService.findById(idProducto);
+//        } catch (ProductoNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        Carrito carrito = carritoService.findOne(idCarrito);
+//
+//        ItemProducto itemProducto = new ItemProducto();
+//        itemProducto.setProducto(producto);
+//        itemProducto.setCarrito(carrito);
+//        itemProducto.setCantidad(cantidad);
+//
+//        return new ResponseEntity<>(carritoService.aniadirItemProducto(itemProducto), HttpStatus.ACCEPTED);
+//    }
 }

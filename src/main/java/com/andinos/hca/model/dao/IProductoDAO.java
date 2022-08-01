@@ -1,8 +1,6 @@
 package com.andinos.hca.model.dao;
 
-import com.andinos.hca.model.entity.Categoria;
-import com.andinos.hca.model.entity.Producto;
-import com.andinos.hca.model.entity.Usuario;
+import com.andinos.hca.model.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Set;

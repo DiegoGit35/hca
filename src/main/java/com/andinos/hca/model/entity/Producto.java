@@ -47,16 +47,7 @@ public class Producto{
 
     private String descripcion;
 
-    public Producto(int idproducto, String nombre, float precio, Estado estado, int stock, List<Categoria> categoria, String imagen, Date fechaYhora, String descripcion) {
-        this.idproducto = idproducto;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.estado = estado;
-        this.stock = stock;
-        this.imagen = imagen;
-        this.fechaYhora = fechaYhora;
-        this.descripcion = descripcion;
-    }
+
 
     public Producto() {
 

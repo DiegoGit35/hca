@@ -20,15 +20,21 @@ import java.net.MalformedURLException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
 
-    @GetMapping(value = "user")
-    public ResponseEntity<?> getProductos(){
+    @GetMapping
+    public ResponseEntity<?> getUsuarios(){
         return new ResponseEntity<> (usuarioService.findAll(),
+                HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> saveUsuario(@RequestBody Usuario usuario){
+        return new ResponseEntity<> (usuarioService.save(usuario),
                 HttpStatus.ACCEPTED);
     }
 }

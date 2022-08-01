@@ -2,18 +2,22 @@ package com.andinos.hca.model.service;
 
 
 import com.andinos.hca.model.dao.ICarritoDAO;
+import com.andinos.hca.model.dao.IProductoDAO;
 import com.andinos.hca.model.entity.Carrito;
 import com.andinos.hca.model.entity.ItemProducto;
+import com.andinos.hca.model.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class CarritoServiceImpl implements ICarritoService{
+public class CarritoServiceImpl implements ICarritoService {
 
     @Autowired
     private ICarritoDAO carritoDao;
+
 
     @Override
     public List<Carrito> findAll() {
@@ -21,9 +25,10 @@ public class CarritoServiceImpl implements ICarritoService{
     }
 
     @Override
-    public boolean save(Carrito carrito) {
+    @Transactional
+    public Carrito save(Carrito carrito) {
         carritoDao.save(carrito);
-        return true;
+        return carrito;
     }
 
     @Override
@@ -37,11 +42,4 @@ public class CarritoServiceImpl implements ICarritoService{
         return true;
     }
 
-    @Override
-    public boolean aniadirItemProducto(ItemProducto itemProducto) {
-        Carrito carrito = new Carrito();
-        carrito.addItemProducto(itemProducto);
-        carritoDao.save(carrito);
-        return true;
-    }
 }

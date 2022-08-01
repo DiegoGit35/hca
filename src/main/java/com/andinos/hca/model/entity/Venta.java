@@ -21,11 +21,11 @@ public class Venta implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="usuario", nullable=false)
+    @JoinColumn(name="idUsuario", nullable=false)
     private Usuario usuario;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="carrito")
+    @JoinColumn(name="idCarrito")
     private Carrito carrito;
 
     @Temporal(TemporalType.DATE)
@@ -36,6 +36,9 @@ public class Venta implements Serializable {
     private BigDecimal monto;
 
     private Enum<FormaDePago> formaDePago;
+
+    public Venta() {
+    }
 
     public Usuario getUsuario() {
         return usuario;
