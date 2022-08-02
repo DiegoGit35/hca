@@ -65,7 +65,7 @@ public class Usuario implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "idCarrito", referencedColumnName = "id")
-    private Carrito carrito;
+    private List<Carrito> carrito;
     public void setId(Long id) {
         this.id = id;
     }
