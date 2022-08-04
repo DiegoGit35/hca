@@ -1,21 +1,15 @@
 package com.andinos.hca.controller;
 
 
+import com.andinos.hca.DTO.ItemsDTO;
 import com.andinos.hca.model.dao.ICarritoDAO;
 import com.andinos.hca.model.dao.IUsuarioDAO;
 import com.andinos.hca.model.entity.*;
-import com.andinos.hca.model.enums.Estado;
-import com.andinos.hca.model.exceptions.ProductoNotFoundException;
 import com.andinos.hca.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.Date;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/productos")
@@ -66,18 +60,18 @@ public class ProductoController {
     }
 
 
-    @DeleteMapping
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         productoService.delete(id);
     }
 
     @PostMapping(value = "/{id}")
-    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable("id") Long idProducto, @RequestBody Integer cantidad, @RequestBody Carrito carrito) {
+    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable("id") Long idProducto, @RequestBody ItemsDTO itemsDTO) {
 //        Usuario usuario = usuarioDAO.findById(idUsuario);
-//        Carrito carrito = carritoDao.findCarritoByUsuario;
+//        Carrito carrito = carritoDao.findCarritoByUsuario(usuario.getId());
 
-        Integer aniadirCantidad = itemProductoService.aniadirItemProducto(idProducto, cantidad, carrito);
+        Integer aniadirCantidad = itemProductoService.aniadirItemProducto(idProducto, itemsDTO.getCantidad(), itemsDTO.getCarrito());
         String mensaje = "se añadieron: " + aniadirCantidad + " items a tu carrito";
         return new ResponseEntity<>(mensaje, HttpStatus.ACCEPTED);
     }

@@ -23,7 +23,7 @@ public class ItemProducto implements Serializable {
     private Integer cantidad;
 
     @ManyToOne
-    @JoinColumn(name="idcarrito", nullable=false)
+    @JoinColumn(name="idCarrito")
     private Carrito carrito;
 
     @ManyToOne(fetch = FetchType.LAZY)

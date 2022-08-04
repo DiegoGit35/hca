@@ -15,11 +15,11 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="producto")
-public class Producto{
+public class Producto implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idproducto;
+    private Long idproducto;
 
 
     private String nombre;
@@ -53,11 +53,11 @@ public class Producto{
 
     }
 
-    public int getIdproducto() {
+    public Long getIdproducto() {
         return idproducto;
     }
 
-    public void setIdproducto(int idproducto) {
+    public void setIdproducto(Long idproducto) {
         this.idproducto = idproducto;
     }
 

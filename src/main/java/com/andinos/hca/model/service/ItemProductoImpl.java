@@ -40,8 +40,8 @@ public class ItemProductoImpl implements IItemProductoService {
     }
     @Override
     public Integer aniadirItemProducto(Long idProducto, Integer cantidad, Carrito carrito) {
-        Integer cantAniadida = cantidad;
-        Producto producto = productoDao.findById(idProducto).get();
+        int cantAniadida = cantidad;
+        Producto producto = productoDao.findById( idProducto).get();
         ItemProducto itemProducto = itemProductoDAO.findByCarritoAndProducto(carrito, producto);
         if(itemProducto != null){
             cantAniadida += itemProducto.getCantidad();

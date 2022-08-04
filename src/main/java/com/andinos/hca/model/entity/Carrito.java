@@ -16,13 +16,15 @@ public class Carrito implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCarrito", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "carrito", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "carrito")
     private Set<ItemProducto> misItemProductos;
 
-    @ManyToOne
-    @JoinColumn(name = "idCarrito", insertable = false, updatable = false)
+//    @ManyToOne
+//    @JoinColumn(name = "idCarrito", insertable = false, updatable = false)
+    @OneToOne
     private Usuario usuario;
 
     public Carrito() {
@@ -67,7 +69,7 @@ public class Carrito implements Serializable {
     }
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="idventa")
+    @JoinColumn(name="idVenta")
     private Venta venta;
 
 

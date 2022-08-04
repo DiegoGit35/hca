@@ -63,9 +63,12 @@ public class Usuario implements Serializable {
         createTime = new Date();
     }
 
-    @OneToMany
-    @JoinColumn(name = "idCarrito", referencedColumnName = "id")
+//    @OneToMany
+//    @JoinColumn(name = "idCarrito", referencedColumnName = "id")
+//    private List<Carrito> carrito;
+    @OneToOne
     private Carrito carrito;
+
     public void setId(Long id) {
         this.id = id;
     }
