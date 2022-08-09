@@ -23,12 +23,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
     public Iterable<Usuario> findAll() {
         return usuarioDao.findAll();
     }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<Usuario> findAll(Pageable pageable) {
-        return usuarioDao.findAll(pageable);
-    }
+//
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Page<Usuario> findAll(Pageable pageable) {
+//        return usuarioDao.findAll(pageable);
+//    }
 
     @Override
     public Usuario findOne(Long id) {

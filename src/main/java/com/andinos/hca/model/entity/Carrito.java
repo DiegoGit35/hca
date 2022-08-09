@@ -4,11 +4,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
-@Data
 @Table(name = "carrito")
 public class Carrito implements Serializable {
 
@@ -25,6 +24,7 @@ public class Carrito implements Serializable {
 //    @ManyToOne
 //    @JoinColumn(name = "idCarrito", insertable = false, updatable = false)
     @OneToOne
+    @JoinColumn(name = "IdUsuario", referencedColumnName = "id")
     private Usuario usuario;
 
     public Carrito() {
@@ -56,8 +56,9 @@ public class Carrito implements Serializable {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public Carrito setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        return this;
     }
 
     public Venta getVenta() {

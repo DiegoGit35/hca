@@ -12,7 +12,7 @@ public interface IUsuarioService {
 
     public Iterable<Usuario> findAll();
 
-    public Page<Usuario> findAll(Pageable pageable);
+//    public Page<Usuario> findAll(Pageable pageable);
     public Usuario findOne(Long id);
     public Usuario save(Usuario Usuario);
 

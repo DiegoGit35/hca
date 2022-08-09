@@ -5,11 +5,14 @@ import com.andinos.hca.DTO.ItemsDTO;
 import com.andinos.hca.model.dao.ICarritoDAO;
 import com.andinos.hca.model.dao.IUsuarioDAO;
 import com.andinos.hca.model.entity.*;
+import com.andinos.hca.model.exceptions.YaExisteException;
 import com.andinos.hca.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/productos")
@@ -19,7 +22,7 @@ public class ProductoController {
     private IProductoService productoService;
 
     @Autowired
-    private ICarritoDAO carritoDAO;
+    private ICarritoService carritoService;
 
     @Autowired
     private IUsuarioDAO usuarioDAO;
@@ -67,13 +70,14 @@ public class ProductoController {
     }
 
     @PostMapping(value = "/{id}")
-    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable("id") Long idProducto, @RequestBody ItemsDTO itemsDTO) {
-//        Usuario usuario = usuarioDAO.findById(idUsuario);
-//        Carrito carrito = carritoDao.findCarritoByUsuario(usuario.getId());
-
-        Integer aniadirCantidad = itemProductoService.aniadirItemProducto(idProducto, itemsDTO.getCantidad(), itemsDTO.getCarrito());
-        String mensaje = "se añadieron: " + aniadirCantidad + " items a tu carrito";
-        return new ResponseEntity<>(mensaje, HttpStatus.ACCEPTED);
+    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable("id") Long idProducto, @RequestBody int idUsuario) {
+//        Optional<Usuario> usuario = usuarioDAO.findById(idUsuario);
+//        Carrito carrito = carritoService.findCarritoByUsuario(usuario.stream());
+        try {
+            return new ResponseEntity<>(itemProductoService.addItemProductoByUsuarioId(idProducto,  (long) idUsuario), HttpStatus.ACCEPTED);
+        } catch (YaExisteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 //    @DeleteMapping(value = "/{id}")

@@ -32,11 +32,11 @@ public class CarritoController {
         return new ResponseEntity<>(carrito, HttpStatus.FOUND);
     }
 
-//    @PostMapping
-////    @ResponseStatus(HttpStatus.CREATED)
-//    public ResponseEntity<Carrito> save(@RequestBody Carrito carrito){
-//        return new ResponseEntity<>(carritoService.save(carrito), HttpStatus.CREATED);
-//    }
+    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Carrito> save(@RequestBody Carrito carrito){
+        return new ResponseEntity<>(carritoService.save(carrito), HttpStatus.CREATED);
+    }
 
 
     @DeleteMapping(value = "/{idItem}")

@@ -1,15 +1,20 @@
 package com.andinos.hca.model.service;
 
+import com.andinos.hca.model.dao.ICarritoDAO;
 import com.andinos.hca.model.dao.IItemProductoDAO;
 import com.andinos.hca.model.dao.IProductoDAO;
+import com.andinos.hca.model.dao.IUsuarioDAO;
 import com.andinos.hca.model.entity.Carrito;
 import com.andinos.hca.model.entity.ItemProducto;
 import com.andinos.hca.model.entity.Producto;
+import com.andinos.hca.model.exceptions.YaExisteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 @Service
 public class ItemProductoImpl implements IItemProductoService {
@@ -17,6 +22,11 @@ public class ItemProductoImpl implements IItemProductoService {
     private IItemProductoDAO itemProductoDAO;
     @Autowired
     private IProductoDAO productoDao;
+
+    @Autowired
+    private ICarritoDAO carritoDao;
+    @Autowired
+    private IUsuarioDAO usuarioDao;
 
 
     @Override
@@ -38,26 +48,54 @@ public class ItemProductoImpl implements IItemProductoService {
         itemProductoDAO.deleteById(id);
         return true;
     }
+
+//    @Override
+//    public List<Item> addCartItemsByCustomerId(String customerId, @Valid Item item) {
+//    CartEntity entity = getCartByCustomerId(customerId);
+//    long count = entity.getItems().stream()
+//            .filter(i -> i.getProduct().getId().equals(UUID.fromString(item.getId()))).count();
+//    if (count > 0) {
+//        throw new GenericAlreadyExistsException(
+//                String.format("Item with Id (%s) already exists. You can update it.", item.getId()));
+//    }
+//    entity.getItems().add(itemService.toEntity(item));
+//    return itemService.toModelList(repository.save(entity).getItems());
+//}
     @Override
-    public Integer aniadirItemProducto(Long idProducto, Integer cantidad, Carrito carrito) {
-        int cantAniadida = cantidad;
-        Producto producto = productoDao.findById( idProducto).get();
-        ItemProducto itemProducto = itemProductoDAO.findByCarritoAndProducto(carrito, producto);
-        if(itemProducto != null){
-            cantAniadida += itemProducto.getCantidad();
-            itemProducto.setCantidad(cantAniadida);
-        } else {
-            itemProducto = new ItemProducto();
-            itemProducto.setCantidad(cantidad);
-            itemProducto.setProducto(producto);
-            itemProducto.setCarrito(carrito);
+    public Carrito addItemProductoByUsuarioId(Long idProducto, Long idUsuario) throws YaExisteException {
+        Carrito carrito = getCarritoByUsuarioId(idUsuario);
+        long lista = carrito.getItemProductos().stream()
+                .filter(i -> i.getProducto().getIdproducto().equals(idProducto)).count();
+        if (lista > 0){
+            throw new YaExisteException("Ya existe el item en el carrito");
         }
-        itemProductoDAO.save(itemProducto);
-        return cantAniadida;
+        ItemProducto item = new ItemProducto();
+        item.setCantidad(1);
+        item.setCarrito(carrito);
+        item.setProducto(productoDao.findById(idProducto).orElse(new Producto()));
+        carrito.getItemProductos().add(itemProductoDAO.save(item));
+        return carritoDao.save(carrito);
     }
 
 //    public void sumarMismoItem(ItemProducto itemProducto){
 ////        implementar logica para sumar cantidades de productos iguales en el carrito
 ////        buena suerte!!
+//    }
+
+    @Override
+    public Carrito getCarritoByUsuarioId(Long IdUsuario) {
+        Carrito carrito = carritoDao.findByUsuarioId(IdUsuario)
+                .orElse(new Carrito());
+        if (Objects.isNull(carrito.getUsuario())) {
+            carrito.setUsuario(usuarioDao.findById(IdUsuario)
+                    .orElseThrow());
+        }
+        return carrito;
+    }
+//    public ItemProducto toEntity(ItemProducto m) {
+//        ItemProducto e = new ItemProducto();
+//        e.setProducto(new Producto().setIdproducto(m.getId()));
+//        e.setCantidad(m.getCantidad());
+//        return e;
 //    }
 }

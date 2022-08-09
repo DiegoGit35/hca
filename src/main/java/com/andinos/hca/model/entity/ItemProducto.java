@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Data
 @Table(name = "item_producto")
 public class ItemProducto implements Serializable {
     public ItemProducto() {
@@ -27,15 +26,8 @@ public class ItemProducto implements Serializable {
     private Carrito carrito;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idproducto")
+    @JoinColumn(name = "idProducto")
     private Producto producto;
-
-    public ItemProducto(Long id, Integer cantidad, Carrito carrito, Producto producto) {
-        this.id = id;
-        this.cantidad = cantidad;
-        this.carrito = carrito;
-        this.producto = producto;
-    }
 
     public Integer getCantidad() {
         return cantidad;

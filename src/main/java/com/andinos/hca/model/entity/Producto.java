@@ -5,21 +5,17 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import lombok.Data;
-
 @Entity
-@Data
 @Table(name="producto")
 public class Producto implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idproducto;
+    private Long idProducto;
 
 
     private String nombre;
@@ -29,7 +25,7 @@ public class Producto implements Serializable{
 
     private Estado estado;
 
-    private int category_id;
+
 
     private int stock;
 
@@ -54,11 +50,12 @@ public class Producto implements Serializable{
     }
 
     public Long getIdproducto() {
-        return idproducto;
+        return idProducto;
     }
 
-    public void setIdproducto(Long idproducto) {
-        this.idproducto = idproducto;
+    public Producto setIdproducto(Long idProducto) {
+        this.idProducto = idProducto;
+        return this;
     }
 
     public String getNombre() {
@@ -85,13 +82,6 @@ public class Producto implements Serializable{
         this.estado = estado;
     }
 
-    public int getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
-    }
 
     public int getStock() {
         return stock;

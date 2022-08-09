@@ -5,6 +5,7 @@ import com.andinos.hca.model.entity.ItemProducto;
 import com.andinos.hca.model.entity.Usuario;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface ICarritoService {
     public List<Carrito> findAll();
@@ -14,6 +15,7 @@ public interface ICarritoService {
     public Carrito findOne(Long id);
 
     public boolean delete(Long id);
+
 
 
 //    public void update(Carrito carrito);

@@ -6,11 +6,13 @@ import com.andinos.hca.model.dao.IProductoDAO;
 import com.andinos.hca.model.entity.Carrito;
 import com.andinos.hca.model.entity.ItemProducto;
 import com.andinos.hca.model.entity.Producto;
+import com.andinos.hca.model.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class CarritoServiceImpl implements ICarritoService {
@@ -33,7 +35,7 @@ public class CarritoServiceImpl implements ICarritoService {
 
     @Override
     public Carrito findOne(Long id) {
-        return carritoDao.findById(id).orElse(null);
+        return carritoDao.findByUsuarioId(id).orElse(null);
     }
 
     @Override
@@ -41,5 +43,6 @@ public class CarritoServiceImpl implements ICarritoService {
         carritoDao.deleteById(id);
         return true;
     }
+
 
 }

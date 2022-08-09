@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Data
 @Table(name = "venta")
 public class Venta implements Serializable {
 

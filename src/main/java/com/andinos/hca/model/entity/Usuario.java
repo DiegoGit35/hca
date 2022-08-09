@@ -12,10 +12,10 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name="usuario")
 public class Usuario implements Serializable {
     @Id
+    @Column(name = "id", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -49,15 +49,6 @@ public class Usuario implements Serializable {
         this.ventas = new ArrayList<Venta>();
     }
 
-    public Usuario(Long id, String username, String email, String password, Date createTime, String foto) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.createTime = createTime;
-        this.foto = foto;
-    }
-
     @PrePersist
     public void prePersist() {
         createTime = new Date();
@@ -66,7 +57,7 @@ public class Usuario implements Serializable {
 //    @OneToMany
 //    @JoinColumn(name = "idCarrito", referencedColumnName = "id")
 //    private List<Carrito> carrito;
-    @OneToOne
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, orphanRemoval = true)
     private Carrito carrito;
 
     public void setId(Long id) {

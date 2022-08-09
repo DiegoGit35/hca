@@ -1,22 +1,32 @@
 package com.andinos.hca.DTO;
 
 import com.andinos.hca.model.entity.Carrito;
+import com.andinos.hca.model.entity.ItemProducto;
+import com.andinos.hca.model.entity.Usuario;
 
 public class ItemsDTO {
 
-    public Integer cantidad;
-    public Carrito carrito;
+    public ItemProducto itemProducto;
+    public Long idUsuario;
 
-    public ItemsDTO(Integer cantidad, Carrito carrito) {
-        this.cantidad = cantidad;
-        this.carrito = carrito;
+    public ItemsDTO(ItemProducto itemProducto, Long idUsuario) {
+        this.itemProducto = itemProducto;
+        this.idUsuario = idUsuario;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
+    public ItemProducto getItemProducto() {
+        return itemProducto;
     }
 
-    public Carrito getCarrito() {
-        return carrito;
+    public void setItemProducto(ItemProducto itemProducto) {
+        this.itemProducto = itemProducto;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }
