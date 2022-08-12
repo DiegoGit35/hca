@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICarritoDAO extends JpaRepository<Carrito, Long> {
-    public List<ItemProducto> findByUsuario(Usuario usuario);
-
-    Optional<Carrito> findByUsuarioId(Long idUsuario);
+    Optional<Carrito> findCarritoByUsuarioId(Long idUsuario);
 
 }

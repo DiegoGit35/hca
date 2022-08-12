@@ -70,11 +70,11 @@ public class ProductoController {
     }
 
     @PostMapping(value = "/{id}")
-    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable("id") Long idProducto, @RequestBody int idUsuario) {
+    public ResponseEntity<?> aniadirProductoAlCarrito(@PathVariable("id") Long idProducto, @RequestBody Long idUsuario) {
 //        Optional<Usuario> usuario = usuarioDAO.findById(idUsuario);
 //        Carrito carrito = carritoService.findCarritoByUsuario(usuario.stream());
         try {
-            return new ResponseEntity<>(itemProductoService.addItemProductoByUsuarioId(idProducto,  (long) idUsuario), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(itemProductoService.addItemProductoByUsuarioId(idProducto,  idUsuario), HttpStatus.ACCEPTED);
         } catch (YaExisteException e) {
             throw new RuntimeException(e);
         }

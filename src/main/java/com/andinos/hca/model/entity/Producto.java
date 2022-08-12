@@ -12,6 +12,21 @@ import java.util.List;
 @Entity
 @Table(name="producto")
 public class Producto implements Serializable{
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "idProducto=" + idProducto +
+                ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", estado=" + estado +
+                ", stock=" + stock +
+                ", imagen='" + imagen + '\'' +
+                ", categoria=" + categoria +
+                ", fechaYhora=" + fechaYhora +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

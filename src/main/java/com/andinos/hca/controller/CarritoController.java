@@ -1,8 +1,6 @@
 package com.andinos.hca.controller;
 
 import com.andinos.hca.model.entity.Carrito;
-import com.andinos.hca.model.entity.ItemProducto;
-import com.andinos.hca.model.entity.Usuario;
 import com.andinos.hca.model.service.CarritoServiceImpl;
 import com.andinos.hca.model.service.IItemProductoService;
 import com.andinos.hca.model.service.UsuarioServiceImpl;
@@ -10,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
 
 @RestController
 @RequestMapping("/carrito")
@@ -28,7 +24,7 @@ public class CarritoController {
 
     @GetMapping
     public  ResponseEntity<?> getItems(@RequestParam Long idUsuario){
-        Carrito carrito = carritoService.findOne(idUsuario);
+        Carrito carrito = carritoService.findCarrito(idUsuario);
         return new ResponseEntity<>(carrito, HttpStatus.FOUND);
     }
 

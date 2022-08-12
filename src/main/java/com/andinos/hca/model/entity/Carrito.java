@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,9 +20,19 @@ public class Carrito implements Serializable {
     private Long id;
 
     @OneToMany(mappedBy = "carrito")
-    private Set<ItemProducto> misItemProductos;
+    private List<ItemProducto> misItemProductos;
 
-//    @ManyToOne
+    @Override
+    public String toString() {
+        return "Carrito{" +
+                "id=" + id +
+                ", misItemProductos=" + misItemProductos +
+                ", usuario=" + usuario +
+                ", venta=" + venta +
+                '}';
+    }
+
+    //    @ManyToOne
 //    @JoinColumn(name = "idCarrito", insertable = false, updatable = false)
     @OneToOne
     @JoinColumn(name = "IdUsuario", referencedColumnName = "id")
@@ -39,11 +50,11 @@ public class Carrito implements Serializable {
         this.id = id;
     }
 
-    public Set<ItemProducto> getItemProductos() {
+    public List<ItemProducto> getItemProductos() {
         return misItemProductos;
     }
 
-    public void setItemProductos(Set<ItemProducto> misItemProductos) {
+    public void setItemProductos(List<ItemProducto> misItemProductos) {
         this.misItemProductos = misItemProductos;
     }
 

@@ -71,9 +71,11 @@ public class ItemProductoImpl implements IItemProductoService {
         }
         ItemProducto item = new ItemProducto();
         item.setCantidad(1);
-        item.setCarrito(carrito);
-        item.setProducto(productoDao.findById(idProducto).orElse(new Producto()));
-        carrito.getItemProductos().add(itemProductoDAO.save(item));
+//        item.setCarrito(carrito);
+        Producto producto = productoDao.findById(idProducto).orElseThrow();
+        item.setProducto(producto);
+        itemProductoDAO.save(item);
+        carrito.addItemProducto(item);
         return carritoDao.save(carrito);
     }
 
@@ -84,7 +86,7 @@ public class ItemProductoImpl implements IItemProductoService {
 
     @Override
     public Carrito getCarritoByUsuarioId(Long IdUsuario) {
-        Carrito carrito = carritoDao.findByUsuarioId(IdUsuario)
+        Carrito carrito = carritoDao.findCarritoByUsuarioId(IdUsuario)
                 .orElse(new Carrito());
         if (Objects.isNull(carrito.getUsuario())) {
             carrito.setUsuario(usuarioDao.findById(IdUsuario)

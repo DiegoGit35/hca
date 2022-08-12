@@ -21,20 +21,13 @@ public class ItemProducto implements Serializable {
 
     private Integer cantidad;
 
-    @ManyToOne
-    @JoinColumn(name="idCarrito")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carrito_id_carrito")
     private Carrito carrito;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProducto")
     private Producto producto;
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
 
     public Carrito getCarrito() {
         return carrito;
@@ -43,6 +36,21 @@ public class ItemProducto implements Serializable {
     public void setCarrito(Carrito carrito) {
         this.carrito = carrito;
     }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+//    public Carrito getCarrito() {
+//        return carrito;
+//    }
+//
+//    public void setCarrito(Carrito carrito) {
+//        this.carrito = carrito;
+//    }
 
     public Long getId() {
         return id;
@@ -65,4 +73,13 @@ public class ItemProducto implements Serializable {
         return serialVersionUID;
     }
 
+    @Override
+    public String toString() {
+        return "ItemProducto{" +
+                "id=" + id +
+                ", cantidad=" + cantidad +
+//                ", carrito=" + carrito +
+                ", producto=" + producto +
+                '}';
+    }
 }
