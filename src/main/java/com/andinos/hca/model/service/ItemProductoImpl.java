@@ -71,7 +71,6 @@ public class ItemProductoImpl implements IItemProductoService {
         }
         ItemProducto item = new ItemProducto();
         item.setCantidad(1);
-//        item.setCarrito(carrito);
         Producto producto = productoDao.findById(idProducto).orElseThrow();
         item.setProducto(producto);
         itemProductoDAO.save(item);
