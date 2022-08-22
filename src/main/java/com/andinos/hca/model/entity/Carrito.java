@@ -21,7 +21,7 @@ public class Carrito implements Serializable {
     private Long id;
 
     @OneToMany
-    private List<ItemProducto> misItemProductos;
+    private List<ItemProducto> misItemProductos = new ArrayList<>();
 
     @Override
     public String toString() {

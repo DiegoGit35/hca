@@ -23,7 +23,7 @@ public class ItemProducto implements Serializable {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idProducto")
     private Producto producto;
 
