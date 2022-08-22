@@ -9,5 +9,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface IItemProductoDAO extends JpaRepository<ItemProducto, Long> {
-    ItemProducto findByCarritoAndProducto(Carrito carrito, Producto producto);
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Carrito implements Serializable {
     @Column(name = "idCarrito", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "carrito")
+    @OneToMany
     private List<ItemProducto> misItemProductos;
 
     @Override
